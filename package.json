@@ -1,0 +1,24 @@
+{
+  "name": "primo-explore-external-search",
+  "version": "1.0.0",
+  "description": "a primo-explore module that adds facet options to transfer a search to external targets.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alliance-PCJWG/primo-explore-external-search.git"
+  },
+  "keywords": [
+    "library",
+    "catalog",
+    "discovery",
+    "primo",
+    "primo-explore",
+    "exlibris"
+  ],
+  "author": "Nick Budak <budak@lclark.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alliance-PCJWG/primo-explore-external-search/issues"
+  },
+  "homepage": "https://github.com/Alliance-PCJWG/primo-explore-external-search#readme"
+}
