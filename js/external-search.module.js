@@ -11,7 +11,7 @@ angular
             facetGroupCollapsed: false,
             values: undefined
         })
-      }]
+      }
   })
   .component('prmFacetExactAfter', {
       bindings: { parentCtrl: '<' },
