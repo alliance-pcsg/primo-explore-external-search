@@ -5,8 +5,8 @@
 ## Features
 A facet is added to the top of the sidebar with options for transferring the user's search to an external target, such as WorldCat or Google Scholar. The options can be configured with custom text, images, and functions to translate Primo's search query into the target's query syntax.
 
-<!-- ### Screenshot
-![screenshot](screenshots/screenshot.png) -->
+### Screenshot
+![screenshot](screenshot.png)
 
 ## Install
 1. Make sure you've installed and configured [primo-explore-devenv](https://github.com/ExLibrisGroup/primo-explore-devenv).
