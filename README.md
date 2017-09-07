@@ -41,36 +41,67 @@ You can configure the options available by passing an array of search target obj
 | `name`    | string       | the name to display for the target                                                                                   |
 | `url`     | string (url) | the base URL to which a Primo query transformed by `mapping()` will be appended                                      |
 | `img`     | string (url) | a URL to an icon representing the target                                                                             |
-| `mapping` | function     | a function to translate a Primo query (e.g. 'any,contains,dogs') to the target's query (e.g. 'kw:dogs' for WorldCat) |
+| `mapping` | function     | a function to translate Primo queries and filters to the target's syntax. will receive an array of queries and an array of filters. |
+
+### Mappings
+
+A mapping function will always be passed an array of queries (e.g. 'any,contains,dogs') and filters (e.g. 'pfilter,exact,articles'). For an advanced search, these will also contain an operator such as AND or OR. The example below is the structure from an advanced search where any field contains 'dogs' and the author field starts with 'me' and the material type is set to 'articles'.
+
+```js
+queries = [
+    'any,contains,dogs,AND',
+    'creator,begins_with,me,AND'
+]
+filters = [
+    'pfilter,exact,articles,AND'
+]
+```
+
+It is up to the mapping function to parse these arrays and take action with them. Ultimately, the function should `return` a value, which will be appended to the end of the `url` property. One approach, as in the example below, is to match parts of the queries and filters to lookup tables using `split()`. If the mapping function is particularly complex, it may be prudent to use `try/catch` and return an empty string if the function fails, so that the user is at least redirected to the target page rather than taking no action at all.
+
+### Example
 
 The example below adds options for WorldCat and Google Scholar.
 
 ```js
-app.value('searchTargets', [
-  {
+app.value('searchTargets', [{
     "name": "Worldcat",
-    "url": "https://www.worldcat.org/search?queryString=",
+    "url": "https://watzek.lclark.edu/src/prod/worldcat.php?",
     "img": "https://cdn.rawgit.com/Alliance-PCJWG/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png",
-    mapping: function(search) {
-      const type_mappings = {
-        "any": "kw",
-        "title": "ti",
-        "creator": "au",
-        "subject": "su"
+    mapping: function (queries, filters) {
+      const query_mappings = {
+        'any': 'kw',
+        'title': 'ti',
+        'creator': 'au',
+        'subject': 'su',
+        'isbn': 'bn',
+        'issn': 'n2'
       }
-      let terms = search.split(",");
-      let type = type_mappings[terms[0]] || "kw";
-      let query = terms[2] || "";
-      return type + ':' + query;
+      try {
+        return 'queryString=' + queries.map(part => {
+          let terms = part.split(',')
+          let type = query_mappings[terms[0]] || 'kw'
+          let string = terms[2] || ''
+          let join = terms[3] || ''
+          return type + ':' + string + ' ' + join + ' '
+        }).join('')
+      }
+      catch (e) {
+        return ''
+      }
     }
   },
   {
     "name": "Google Scholar",
     "url": "https://scholar.google.com/scholar?q=",
     "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/200px-Google_%22G%22_Logo.svg.png",
-    mapping: function(search) {
-      let terms = search.split(",");
-      return terms[2] || "";
+    mapping: function (queries, filters) {
+      try {
+        return queries.map(part => part.split(",")[2] || "").join(' ')
+      }
+      catch (e) {
+        return ''
+      }
     }
   }
 ])
