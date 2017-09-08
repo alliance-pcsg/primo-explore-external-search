@@ -61,12 +61,12 @@ It is up to the mapping function to parse these arrays and take action with them
 
 ### Example
 
-The example below adds options for WorldCat and Google Scholar.
+The example below adds options for WorldCat Discovery (for an example institution my.library) and Google Scholar.
 
 ```js
 app.value('searchTargets', [{
     "name": "Worldcat",
-    "url": "https://watzek.lclark.edu/src/prod/worldcat.php?",
+    "url": "https://my.library.on.worldcat.org/search?",
     "img": "https://cdn.rawgit.com/Alliance-PCJWG/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png",
     mapping: function (queries, filters) {
       const query_mappings = {
