@@ -3,15 +3,15 @@ angular
   .value('searchTargets', [])
   .component('prmFacetAfter', {
       bindings: { parentCtrl: '<' },
-      controller: function () {
-        this.parentCtrl.facetService.results.unshift({
-            name: 'External Search',
-            displayedType: 'exact',
-            limitCount: 0,
-            facetGroupCollapsed: false,
-            values: undefined
-        })
-      }
+      controller: ['externalSearchService', function (externalSearchService) {
+        externalSearchService.controller = this.parentCtrl
+        externalSearchService.addExtSearch()
+      }]
+  })
+  .component('prmPageNavMenuAfter', {
+    controller: ['externalSearchService', function (externalSearchService) {
+      if (externalSearchService.controller) externalSearchService.addExtSearch()
+    }]
   })
   .component('prmFacetExactAfter', {
       bindings: { parentCtrl: '<' },
@@ -41,4 +41,23 @@ angular
         $scope.queries = Array.isArray(query) ? query : query ? [query] : false
         $scope.filters = Array.isArray(filter) ? filter : filter ? [filter] : false
       }]
+  })
+  .factory('externalSearchService', function () {
+    return {
+      get controller() {
+        return this.prmFacetCtrl || false
+      },
+      set controller(controller) {
+        this.prmFacetCtrl = controller
+      },
+      addExtSearch: function () {
+        this.prmFacetCtrl.facetService.results.unshift({
+          name: 'External Search',
+          displayedType: 'exact',
+          limitCount: 0,
+          facetGroupCollapsed: false,
+          values: undefined
+        })
+      }
+    }
   })
