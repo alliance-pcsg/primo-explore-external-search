@@ -51,13 +51,15 @@ angular
         this.prmFacetCtrl = controller
       },
       addExtSearch: function () {
-        this.prmFacetCtrl.facetService.results.unshift({
-          name: 'External Search',
-          displayedType: 'exact',
-          limitCount: 0,
-          facetGroupCollapsed: false,
-          values: undefined
-        })
+        if (this.prmFacetCtrl.facetService.results[0].name !== 'External Search') {
+          this.prmFacetCtrl.facetService.results.unshift({
+            name: 'External Search',
+            displayedType: 'exact',
+            limitCount: 0,
+            facetGroupCollapsed: false,
+            values: undefined
+          })
+        }
       }
     }
   })
