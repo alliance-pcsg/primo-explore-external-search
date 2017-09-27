@@ -1,6 +1,7 @@
 # primo-explore-external-search
 
-<!-- ![Build Status](https://api.travis-ci.org/Alliance-PCJWG/primo-explore-clickable-logo.svg?branch=master) -->
+![Build Status](https://api.travis-ci.org/alliance-pcsg/primo-explore-external-search.svg)
+[![npm](https://img.shields.io/npm/v/primo-explore-external-search.svg)](https://www.npmjs.com/package/primo-explore-external-search)
 
 ## Features
 A facet is added to the top of the sidebar with options for transferring the user's search to an external target, such as WorldCat or Google Scholar. The options can be configured with custom text, images, and functions to translate Primo's search query into the target's query syntax.
@@ -67,7 +68,7 @@ The example below adds options for WorldCat Discovery (for an example institutio
 app.value('searchTargets', [{
     "name": "Worldcat",
     "url": "https://my.library.on.worldcat.org/search?",
-    "img": "https://cdn.rawgit.com/Alliance-PCJWG/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png",
+    "img": "https://cdn.rawgit.com/alliance-pcsg/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png",
     mapping: function (queries, filters) {
       const query_mappings = {
         'any': 'kw',
@@ -107,7 +108,7 @@ app.value('searchTargets', [{
 ])
 ```
 
-<!-- ## Running tests
+## Running tests
 1. Clone the repo
 2. Run `npm install`
-3. Run `npm test` -->
+3. Run `npm test`
