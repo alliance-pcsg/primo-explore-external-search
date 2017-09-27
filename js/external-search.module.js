@@ -3,51 +3,56 @@ angular
   .value('searchTargets', [])
   .component('prmFacetAfter', {
       bindings: { parentCtrl: '<' },
-      controller: ['externalSearchService', function (externalSearchService) {
-        externalSearchService.controller = this.parentCtrl
-        externalSearchService.addExtSearch()
+      controller: ['externalSearch', function (externalSearch) {
+        this.$onInit = function () {
+          externalSearch.setController(this.parentCtrl)
+          externalSearch.addExtSearch()
+        }
       }]
   })
   .component('prmPageNavMenuAfter', {
-    controller: ['externalSearchService', function (externalSearchService) {
-      if (externalSearchService.controller) externalSearchService.addExtSearch()
+    controller: ['externalSearch', function (externalSearch) {
+      this.$onInit = function () {
+        if (externalSearch.getController()) externalSearch.addExtSearch()
+      }
     }]
   })
   .component('prmFacetExactAfter', {
       bindings: { parentCtrl: '<' },
-      template: `
-      <div ng-if="name === 'External Search'">
-          <div ng-hide="$ctrl.parentCtrl.facetGroup.facetGroupCollapsed">
-              <div class="section-content animate-max-height-variable">
-                  <div class="md-chips md-chips-wrap">
-                      <div ng-repeat="target in targets" aria-live="polite" class="md-chip animate-opacity-and-scale facet-element-marker-local4">
-                          <div class="md-chip-content layout-row" role="button" tabindex="0">
-                              <strong dir="auto" title="{{ target.name }}">
-                                  <a ng-href="{{ target.url + target.mapping(queries, filters) }}" target="_blank">
-                                      <img ng-src="{{ target.img }}" width="22" height="22" style="vertical-align:middle;"> {{ target.name }}
-                                  </a>
-                              </strong>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>`,
+      template: '<div ng-if="name === \'External Search\'">\
+          <div ng-hide="$ctrl.parentCtrl.facetGroup.facetGroupCollapsed">\
+              <div class="section-content animate-max-height-variable">\
+                  <div class="md-chips md-chips-wrap">\
+                      <div ng-repeat="target in targets" aria-live="polite" class="md-chip animate-opacity-and-scale facet-element-marker-local4">\
+                          <div class="md-chip-content layout-row" role="button" tabindex="0">\
+                              <strong dir="auto" title="{{ target.name }}">\
+                                  <a ng-href="{{ target.url + target.mapping(queries, filters) }}" target="_blank">\
+                                      <img ng-src="{{ target.img }}" width="22" height="22" style="vertical-align:middle;"> {{ target.name }}\
+                                  </a>\
+                              </strong>\
+                          </div>\
+                      </div>\
+                  </div>\
+              </div>\
+          </div>\
+      </div>',
       controller: ['$scope', '$location', 'searchTargets', function ($scope, $location, searchTargets) {
-        $scope.name = this.parentCtrl.facetGroup.name
-        $scope.targets = searchTargets
-        let query = $location.search().query
-        let filter = $location.search().pfilter
-        $scope.queries = Array.isArray(query) ? query : query ? [query] : false
-        $scope.filters = Array.isArray(filter) ? filter : filter ? [filter] : false
+        this.$onInit = function () {
+          $scope.name = this.parentCtrl.facetGroup.name
+          $scope.targets = searchTargets
+          var query = $location.search().query
+          var filter = $location.search().pfilter
+          $scope.queries = Object.prototype.toString.call(query) === '[object Array]' ? query : query ? [query] : false
+          $scope.filters = Object.prototype.toString.call(filter) === '[object Array]' ? filter : filter ? [filter] : false
+        }
       }]
   })
-  .factory('externalSearchService', function () {
+  .factory('externalSearch', function () {
     return {
-      get controller() {
+      getController: function () {
         return this.prmFacetCtrl || false
       },
-      set controller(controller) {
+      setController: function (controller) {
         this.prmFacetCtrl = controller
       },
       addExtSearch: function () {
