@@ -27,7 +27,7 @@ angular
                           <div class="md-chip-content layout-row" role="button" tabindex="0">\
                               <strong dir="auto" title="{{ target.name }}">\
                                   <a ng-href="{{ target.url + target.mapping(queries, filters) }}" target="_blank">\
-                                      <img ng-src="{{ target.img }}" width="22" height="22" style="vertical-align:middle;"> {{ target.name }}\
+                                      <img ng-src="{{ target.img }}" width="22" height="22" alt="{{ target.alt }}" style="vertical-align:middle;"> {{ target.name }}\
                                   </a>\
                               </strong>\
                           </div>\
