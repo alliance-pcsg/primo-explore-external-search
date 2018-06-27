@@ -69,6 +69,7 @@ app.value('searchTargets', [{
     "name": "Worldcat",
     "url": "https://my.library.on.worldcat.org/search?",
     "img": "https://cdn.rawgit.com/alliance-pcsg/primo-explore-worldcat-button/7ee112df/img/worldcat-logo.png",
+    "alt": "Worldcat Logo",
     mapping: function (queries, filters) {
       const query_mappings = {
         'any': 'kw',
@@ -96,6 +97,7 @@ app.value('searchTargets', [{
     "name": "Google Scholar",
     "url": "https://scholar.google.com/scholar?q=",
     "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/200px-Google_%22G%22_Logo.svg.png",
+    "alt": "Google Scholar Logo",
     mapping: function (queries, filters) {
       try {
         return queries.map(part => part.split(",")[2] || "").join(' ')
