@@ -42,7 +42,7 @@ You can configure the options available by passing an array of search target obj
 | `name`    | string       | the name to display for the target                                                                                   |
 | `url`     | string (url) | the base URL to which a Primo query transformed by `mapping()` will be appended                                      |
 | `img`     | string (url) | a URL to an icon representing the target
-| `alt'     | string       | provide alternative text of images for screen readers
+| `alt`     | string       | provide alternative text of images for screen readers
 | `mapping` | function     | a function to translate Primo queries and filters to the target's syntax. will receive an array of queries and an array of filters. |
 
 ### Mappings
