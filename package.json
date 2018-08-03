@@ -1,5 +1,5 @@
 {
-  "name": "primo-explore-external-search",
+  "name": "@orbis-cascade/primo-explore-external-search",
   "version": "1.1.5",
   "description": "a primo-explore module that adds facet options to transfer a search to external targets.",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "primo-explore",
     "exlibris"
   ],
-  "author": "Nick Budak <budak@lclark.edu>",
+  "author": "Nick Budak <nbudak@princeton.edu>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alliance-pcsg/primo-explore-external-search/issues"
