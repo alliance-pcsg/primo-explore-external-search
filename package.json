@@ -1,8 +1,13 @@
 {
-  "name": "primo-explore-external-search",
+  "name": "@orbis-cascade/primo-explore-external-search",
   "version": "1.1.5",
-  "description": "a primo-explore module that adds facet options to transfer a search to external targets.",
-  "main": "index.js",
+  "description": "Adds a primo-explore facet with links to transfer a search to external targets.",
+  "browser": "dist/extsearch.js",
+  "module": "src/module.js",
+  "files": [
+      "dist/",
+      "src/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alliance-pcsg/primo-explore-external-search.git"
@@ -15,22 +20,43 @@
     "primo-explore",
     "exlibris"
   ],
-  "author": "Nick Budak <budak@lclark.edu>",
+  "author": "Nick Budak <nbudak@princeton.edu>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alliance-pcsg/primo-explore-external-search/issues"
   },
   "homepage": "https://github.com/alliance-pcsg/primo-explore-external-search#readme",
   "devDependencies": {
-    "angular": "^1.6.6",
-    "angular-mocks": "^1.6.6",
-    "jasmine-core": "^2.8.0",
-    "karma": "^1.7.1",
-    "karma-jasmine": "^1.1.0",
+    "@babel/core": "^7.0.0-beta.53",
+    "@babel/register": "^7.0.0-beta.51",
+    "angular": "^1.6.8",
+    "angular-mocks": "^1.7.2",
+    "babel-preset-env": "2.0.0-beta.2",
+    "browser-sync": "^2.23.6",
+    "eslint": "^5.2.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-plugin-angular": "^3.3.0",
+    "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-footer": "^2.0.1",
+    "gulp-merge": "^0.1.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.5",
+    "karma-jasmine": "^1.1.2",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-spec-reporter": "0.0.31"
+    "karma-spec-reporter": "0.0.31",
+    "rollup": "^0.62.0",
+    "rollup-plugin-babel": "^4.0.0-beta.7",
+    "rollup-plugin-html": "^0.2.1",
+    "rollup-plugin-json": "^3.0.0"
   },
   "scripts": {
-    "test": "karma start --single-run"
+    "start": "gulp",
+    "test": "karma start --single-run",
+    "build": "rollup -c"
+  },
+  "config": {
+    "primo_host": "alliance-primo-sb.hosted.exlibrisgroup.com",
+    "primo_view": "ALLIANCE"
   }
 }

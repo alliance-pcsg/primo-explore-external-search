@@ -1,0 +1,23 @@
+{
+    "extends": [
+        "google",
+        "plugin:angular/johnpapa"
+    ],
+    "rules": {
+        "arrow-parens": ["error", "as-needed"],
+        "semi": ["error", "never"],
+        "max-len": "warn",
+        "no-invalid-this": "off",
+        "object-curly-spacing": ["error", "always"],
+        "space-before-function-paren": ["error", "always"],
+        "angular/file-name": "off",
+        "angular/function-type": "off"
+    },
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true
+    }
+}
