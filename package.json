@@ -1,5 +1,8 @@
 {
   "name": "@orbis-cascade/primo-explore-external-search",
+ "dependencies": {
+  "angular": ">=1.7.9"
+},
   "version": "1.1.5",
   "description": "a primo-explore module that adds facet options to transfer a search to external targets.",
   "main": "index.js",
