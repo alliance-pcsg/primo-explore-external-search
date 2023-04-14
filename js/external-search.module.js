@@ -40,7 +40,7 @@ angular
         this.$onInit = function () {
           $scope.name = this.parentCtrl.facetGroup.name
           $scope.targets = searchTargets
-          var query = $location.search().query
+          var query = $location.search().query.replace('&', '%26')
           var filter = $location.search().pfilter
           $scope.queries = Object.prototype.toString.call(query) === '[object Array]' ? query : query ? [query] : false
           $scope.filters = Object.prototype.toString.call(filter) === '[object Array]' ? filter : filter ? [filter] : false
